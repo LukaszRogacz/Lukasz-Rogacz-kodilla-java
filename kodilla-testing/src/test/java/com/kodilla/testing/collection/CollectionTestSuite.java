@@ -54,9 +54,10 @@ public class CollectionTestSuite {
         OddNumbersExterminator oddList = new OddNumbersExterminator();
         ArrayList<Integer> result = oddList.exterminate(myList);
         //Then
-        Integer assertTable[] = new Integer[2];
-        assertTable[0] = 2;
-        assertTable[1] = 4;
-        Assert.assertArrayEquals(assertTable, result.toArray());
+        ArrayList<Integer> assertList = new ArrayList<Integer>();
+        assertList.add(2);
+        assertList.add(4);
+
+        Assert.assertEquals(assertList, result);
     }
 }
