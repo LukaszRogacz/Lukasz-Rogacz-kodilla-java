@@ -104,7 +104,7 @@ public class StatisticsCalculatorTestSuit {
         int resultComment = statisticsMock.commentsCount();
         int resultPost = statisticsMock.postsCount();
         boolean moreComments;
-        if(resultComment>resultPost){
+        if((resultPost==1000)&&(resultComment==2000)){
             moreComments=true;
         }else{
             moreComments=false;
@@ -117,6 +117,7 @@ public class StatisticsCalculatorTestSuit {
         Assert.assertTrue(moreComments);
 
     }
+    @Test
     public void testCalculateAdvStatisticsMorePostsThanComments() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
@@ -136,7 +137,7 @@ public class StatisticsCalculatorTestSuit {
         int resultComment = statisticsMock.commentsCount();
         int resultPost = statisticsMock.postsCount();
         boolean morePosts;
-        if(resultComment<resultPost){
+        if((resultComment==1000) && (resultPost==2000)){
             morePosts=true;
         }else{
             morePosts=false;
@@ -174,13 +175,13 @@ public class StatisticsCalculatorTestSuit {
     }
 
     @Test
-    public void testCalculateAdvStatistics1000Users() {
+    public void testCalculateAdvStatistics100Users() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
         StatisticsCalculator myStatsCalculator = new StatisticsCalculator();
         List<String> userListMock = new ArrayList<String>();
 
-        for(int i=0;i<1000;i++){
+        for(int i=0;i<100;i++){
             userListMock.add("random user");
         }
 
@@ -194,7 +195,7 @@ public class StatisticsCalculatorTestSuit {
         myStatsCalculator.calculateAdvStatistics(statisticsMock);
         myStatsCalculator.showStatistics();
 
-        Assert.assertEquals(1000, result);
+        Assert.assertEquals(100, result);
 
     }
 
