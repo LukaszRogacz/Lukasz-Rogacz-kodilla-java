@@ -26,12 +26,10 @@ public class StatisticsCalculatorTestSuit {
         when(statisticsMock.usersNames()).thenReturn(userListMock);
 
         //When
-        int result = statisticsMock.postsCount();
-        //Then
-
         myStatsCalculator.calculateAdvStatistics(statisticsMock);
         myStatsCalculator.showStatistics();
-
+        int result = myStatsCalculator.getPostQuantity();
+        //Then
         Assert.assertEquals(0, result);
 
     }
@@ -50,12 +48,10 @@ public class StatisticsCalculatorTestSuit {
         when(statisticsMock.usersNames()).thenReturn(userListMock);
 
         //When
-        int result = statisticsMock.postsCount();
-        //Then
-
         myStatsCalculator.calculateAdvStatistics(statisticsMock);
         myStatsCalculator.showStatistics();
-
+        int result = myStatsCalculator.getPostQuantity();
+        //Then
         Assert.assertEquals(1000, result);
 
     }
@@ -75,12 +71,10 @@ public class StatisticsCalculatorTestSuit {
         when(statisticsMock.usersNames()).thenReturn(userListMock);
 
         //When
-        int result = statisticsMock.commentsCount();
-        //Then
-
         myStatsCalculator.calculateAdvStatistics(statisticsMock);
         myStatsCalculator.showStatistics();
-
+        int result = myStatsCalculator.getCommentQuantity();
+        //Then
         Assert.assertEquals(0, result);
 
     }
@@ -101,8 +95,10 @@ public class StatisticsCalculatorTestSuit {
         when(statisticsMock.usersNames()).thenReturn(userListMock);
 
         //When
-        int resultComment = statisticsMock.commentsCount();
-        int resultPost = statisticsMock.postsCount();
+        myStatsCalculator.calculateAdvStatistics(statisticsMock);
+        myStatsCalculator.showStatistics();
+        int resultComment = myStatsCalculator.getCommentQuantity();
+        int resultPost = myStatsCalculator.getPostQuantity();
         boolean moreComments;
         if((resultPost==1000)&&(resultComment==2000)){
             moreComments=true;
@@ -110,10 +106,6 @@ public class StatisticsCalculatorTestSuit {
             moreComments=false;
         }
         //Then
-
-        myStatsCalculator.calculateAdvStatistics(statisticsMock);
-        myStatsCalculator.showStatistics();
-
         Assert.assertTrue(moreComments);
 
     }
@@ -134,8 +126,10 @@ public class StatisticsCalculatorTestSuit {
         when(statisticsMock.usersNames()).thenReturn(userListMock);
 
         //When
-        int resultComment = statisticsMock.commentsCount();
-        int resultPost = statisticsMock.postsCount();
+        myStatsCalculator.calculateAdvStatistics(statisticsMock);
+        myStatsCalculator.showStatistics();
+        int resultComment = myStatsCalculator.getCommentQuantity();
+        int resultPost = myStatsCalculator.getPostQuantity();
         boolean morePosts;
         if((resultComment==1000) && (resultPost==2000)){
             morePosts=true;
@@ -143,10 +137,6 @@ public class StatisticsCalculatorTestSuit {
             morePosts=false;
         }
         //Then
-
-        myStatsCalculator.calculateAdvStatistics(statisticsMock);
-        myStatsCalculator.showStatistics();
-
         Assert.assertTrue(morePosts);
 
     }
@@ -164,12 +154,10 @@ public class StatisticsCalculatorTestSuit {
         when(statisticsMock.usersNames()).thenReturn(userListMock);
 
         //When
-        int result = statisticsMock.usersNames().size();
-        //Then
-
         myStatsCalculator.calculateAdvStatistics(statisticsMock);
         myStatsCalculator.showStatistics();
-
+        int result = myStatsCalculator.getUserQuantity();
+        //Then
         Assert.assertEquals(0, result);
 
     }
@@ -189,12 +177,10 @@ public class StatisticsCalculatorTestSuit {
         when(statisticsMock.usersNames()).thenReturn(userListMock);
 
         //When
-        int result = statisticsMock.usersNames().size();
-        //Then
-
         myStatsCalculator.calculateAdvStatistics(statisticsMock);
         myStatsCalculator.showStatistics();
-
+        int result = myStatsCalculator.getUserQuantity();
+        //Then
         Assert.assertEquals(100, result);
 
     }

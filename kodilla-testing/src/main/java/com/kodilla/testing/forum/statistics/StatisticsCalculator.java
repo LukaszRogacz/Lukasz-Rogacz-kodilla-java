@@ -11,6 +11,17 @@ public class StatisticsCalculator {
     private double averageCommentsPerUser = 0;
     private double averageCommentsPerPost = 0;
 
+    public int getUserQuantity() {
+        return userQuantity;
+    }
+
+    public int getPostQuantity() {
+        return postQuantity;
+    }
+
+    public int getCommentQuantity() {
+        return commentQuantity;
+    }
 
     public void calculateAdvStatistics(Statistics statistics) {
 
