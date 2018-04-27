@@ -1,6 +1,6 @@
 package com.kodilla.stream.portfolio;
 
-import com.sun.xml.internal.ws.policy.AssertionSet;
+
 import org.junit.Assert;
 import org.junit.Test;
 import java.time.LocalDate;
@@ -8,8 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 
 import static java.util.stream.Collectors.toList;
 
@@ -161,24 +160,15 @@ public class BoardTestSuite {
                 .flatMap(t -> t.getTasks().stream())
                 .map(t -> ChronoUnit.DAYS.between(t.getCreated(),LocalDate.now()))
                 .count();
-        double averageDaysTasksInProgress=daysTasksInProgress/tasksInProgress;
+
+        double averageDaysTasksInProgress=((double)daysTasksInProgress/(double)tasksInProgress);
 
 
-        List <Long>streamList=project.getTaskLists().stream()
-                .filter(inProgressTasks::contains)
-                .flatMap(t -> t.getTasks().stream())
-                .map(t -> ChronoUnit.DAYS.between(t.getCreated(),LocalDate.now()))
-                .collect(Collectors.toList());
-
-                int newArray[]=new int[streamList.size()];
-                for (int i=0;i<streamList.size();i++)
-                    newArray[i]=streamList.get(i).intValue();
-
-        OptionalDouble averageDaysTasksInProgress2=IntStream.of(newArray)
-                .average();
-
-
-
+        OptionalDouble averageDaysTasksInProgress2=project.getTaskLists().stream()
+                    .filter(inProgressTasks::contains)
+                    .flatMap(t -> t.getTasks().stream())
+                    .mapToLong(t -> ChronoUnit.DAYS.between(t.getCreated(),LocalDate.now()))
+                    .average();
 
         //Then
         Assert.assertEquals(10.0,averageDaysTasksInProgress,0.00001);

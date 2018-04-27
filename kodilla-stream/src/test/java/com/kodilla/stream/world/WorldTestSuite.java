@@ -1,6 +1,5 @@
 package com.kodilla.stream.world;
 
-import com.kodilla.stream.sand.Europe;
 import org.junit.Assert;
 import org.junit.Test;
 
