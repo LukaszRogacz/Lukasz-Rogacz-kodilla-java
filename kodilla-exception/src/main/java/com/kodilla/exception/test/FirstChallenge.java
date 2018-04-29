@@ -21,14 +21,15 @@ public class FirstChallenge {
         double result;
         try {
             result = firstChallenge.divide(3, 0);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.out.println("Division by 0. Error" + e);
-        } finally {
-
             System.out.println("As a result of division by 0, there is returned the highest value");
             result = Double.MAX_VALUE;
-            System.out.println(result);
         }
+
+
+        System.out.println(result);
 
 
     }
