@@ -13,10 +13,13 @@ public class FlightFinder {
         flightMap.put("Madryt",true);
         flightMap.put("Warszawa",false);
 
-        if ((flightMap.get(flight.getArrivalAirport())==false) || (flightMap.get(flight.departureAirport)==false) ) {
+        if (( !flightMap.containsKey(flight.getArrivalAirport()))
+                ||( !flightMap.containsKey(flight.getDepartureAirport()))
+                || ( !flightMap.get(flight.getArrivalAirport()))
+                || ( !flightMap.get(flight.getDepartureAirport())) ) {
             throw new RouteNotFoundException();
         }else {
-            System.out.println("There is a flight from "+flight.departureAirport+" to "+flight.getArrivalAirport());
+            System.out.println("There is a flight from "+flight.getDepartureAirport()+" to "+flight.getArrivalAirport());
         }
     }
 }

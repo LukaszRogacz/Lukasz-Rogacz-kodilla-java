@@ -2,7 +2,7 @@ package com.kodilla.exception.test;
 
 public class ThirdChallenge {
     public static void main(String[] args) {
-        Flight myFlight=new Flight("Warszawa","Poznan");
+        Flight myFlight=new Flight("Barcelonaa","Poznan");
         FlightFinder flightFinder=new FlightFinder();
         try {
             flightFinder.findFilght(myFlight);
