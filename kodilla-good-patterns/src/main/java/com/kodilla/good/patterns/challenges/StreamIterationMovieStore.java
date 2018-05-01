@@ -6,8 +6,8 @@ public class StreamIterationMovieStore {
     public static void main(String[] args) {
         MovieStore movieStore=new MovieStore();
 
-        String movieList=movieStore.getMovies().entrySet().stream()
-                .flatMap(s-> s.getValue().stream())
+        String movieList=movieStore.getMovies().values().stream()
+                .flatMap(s-> s.stream())
                 .map(s -> s.toString())
                 .collect(Collectors.joining(" ! "));
 
