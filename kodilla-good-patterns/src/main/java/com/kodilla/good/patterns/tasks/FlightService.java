@@ -17,7 +17,7 @@ public class FlightService {
         }
     }
 
-    public Set<Flight> getFlightsFrom(Set<Flight> flightList, String departureAirport) {
+    private Set<Flight> getFlightsFrom(Set<Flight> flightList, String departureAirport) {
         Set<Flight> setFlights = new HashSet<>();
 
         setFlights = flightList.stream()
@@ -27,7 +27,7 @@ public class FlightService {
         return setFlights;
     }
 
-    public Set<Flight> getFlightsTo(Set<Flight> flightList, String arrivalAirport) {
+    private Set<Flight> getFlightsTo(Set<Flight> flightList, String arrivalAirport) {
         Set<Flight> setFlights = new HashSet<>();
 
         setFlights = flightList.stream()
@@ -59,7 +59,7 @@ public class FlightService {
         }
     }
 
-    public Set<Flight> getFlightWithTransfer(Set<Flight> flightList, String departureAirport, String arrivalAirport, String transferAirport) {
+    private Set<Flight> getFlightWithTransfer(Set<Flight> flightList, String departureAirport, String arrivalAirport, String transferAirport) {
         Set<Flight> setFlights = new HashSet<>();
 
         setFlights = flightList.stream()
