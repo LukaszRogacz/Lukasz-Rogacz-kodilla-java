@@ -1,16 +1,15 @@
 package com.kodilla.good.patterns.tasks;
 
-import java.util.List;
+import java.util.Map;
 
 public class ApplicationDistr {
 
     public static void main(String[] args) {
 
         AllProducersRetriever allProducersRetriever=new AllProducersRetriever();
-        List<Producer>allProducers= allProducersRetriever.retrieve();
-        Product product3=new Product("Bread");
+        Map<String,Producer> allProducers= allProducersRetriever.retrieve();
         OrderProcessor orderProcessor=new OrderProcessor(allProducers);
-        orderProcessor.order(10,product3);
+        orderProcessor.order(10,"Bread");
     }
 
 

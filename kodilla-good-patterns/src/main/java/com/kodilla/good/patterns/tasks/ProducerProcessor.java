@@ -5,16 +5,16 @@ import java.util.Map;
 public class ProducerProcessor {
 
 
-    public void addSupply(Product product, Double quantity, Map<Product, Double> Supply) {
-        if (Supply.containsKey(product)) {
-            double oldQuantity = Supply.get(product);
-            Supply.replace(product, oldQuantity + quantity);
+    public void addSupply(String product, Double quantity, Map<String, Double> supply) {
+        if (supply.containsKey(product)) {
+            double oldQuantity = supply.get(product);
+            supply.replace(product, oldQuantity + quantity);
         } else {
-            Supply.put(product, quantity);
+            supply.put(product, quantity);
         }
     }
 
-    public void getSupply(Product product, Double quantity, Map<Product, Double> Supply){
+    public void getSupply(String product, Double quantity, Map<String, Double> Supply){
         if (Supply.containsKey(product)) {
             double oldQuantity = Supply.get(product);
             if (oldQuantity >= quantity) {
