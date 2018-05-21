@@ -15,6 +15,7 @@ public class ShoppingTask implements Task {
     }
 
     private double quantityDone=0;
+    private boolean isTaskExecuted=false;
 
     @Override
     public double executeTask() {
@@ -23,6 +24,7 @@ public class ShoppingTask implements Task {
         quantityDone+=random.nextDouble();
         if(quantityDone>=quantity){
             quantityDone=quantity;
+            isTaskExecuted=true;
         }
         System.out.println("Task done in "+quantityDone/quantity*100+" %");
         return quantityDone/quantity;
@@ -35,11 +37,7 @@ public class ShoppingTask implements Task {
 
     @Override
     public boolean isTaskExecuted() {
-        if(quantityDone==quantity){
-            return true;
-        }else{
-            return false;
-        }
+        return isTaskExecuted;
     }
 
 }

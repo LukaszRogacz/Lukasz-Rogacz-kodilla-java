@@ -15,6 +15,7 @@ public class DrivingTask implements Task {
     }
 
     private double drivingDone = 0;
+    private boolean isTaskExecuted=false;
 
     @Override
     public double executeTask() {
@@ -22,6 +23,7 @@ public class DrivingTask implements Task {
         drivingDone += random.nextDouble();
         if (drivingDone >= 1) {
             drivingDone = 1;
+            isTaskExecuted=true;
         }
         System.out.println("Task done in " + drivingDone * 100 + " %");
         return drivingDone;
@@ -34,10 +36,6 @@ public class DrivingTask implements Task {
 
     @Override
     public boolean isTaskExecuted() {
-        if (drivingDone == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return isTaskExecuted;
     }
 }

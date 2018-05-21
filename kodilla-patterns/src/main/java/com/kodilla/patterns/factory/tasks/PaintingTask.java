@@ -16,6 +16,7 @@ public class PaintingTask implements Task {
 
     double paintingDone=0;
 
+    private boolean isTaskExecuted=false;
 
     @Override
     public double executeTask() {
@@ -23,6 +24,7 @@ public class PaintingTask implements Task {
         paintingDone+=random.nextDouble();
         if(paintingDone>=1){
             paintingDone=1;
+            isTaskExecuted=true;
         }
         System.out.println("Task done in "+paintingDone*100+" %");
         return paintingDone;
@@ -35,10 +37,6 @@ public class PaintingTask implements Task {
 
     @Override
     public boolean isTaskExecuted() {
-        if(paintingDone==1){
-            return true;
-        }else {
-            return false;
-        }
+        return isTaskExecuted;
     }
 }
