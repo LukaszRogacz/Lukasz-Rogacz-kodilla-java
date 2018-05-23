@@ -49,12 +49,10 @@ public class Check {
             computerCheatPlay=-1;
             try {
                 System.out.println("Please write one of the options from menu");
-                key = scanner.next();
+                key = scanner.nextLine();
 
                 String keyOriginal=key;
                 int cheatIndex=keyOriginal.indexOf("cheat");
-                System.out.println("cheatIndex="+cheatIndex);
-
                 if(cheatIndex<0){
                     userPlay = Integer.parseInt(keyOriginal);
 
@@ -120,13 +118,9 @@ public class Check {
     }
 
     public boolean shouldBeEnded(GameSettings gameSettings) {
-        if ((gameSettings.getUserWinRounds() >= gameSettings.getRoundWinNumber())
+        return ((gameSettings.getUserWinRounds() >= gameSettings.getRoundWinNumber())
                 || (gameSettings.getComputerWinRounds() >= gameSettings.getRoundWinNumber())
-                || gameSettings.getIsFinishGame()) {
-            return true;
-        } else {
-            return false;
-        }
+                || gameSettings.getIsFinishGame());
     }
 
 }

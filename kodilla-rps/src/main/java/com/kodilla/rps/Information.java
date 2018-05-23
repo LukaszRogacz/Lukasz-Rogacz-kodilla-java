@@ -63,39 +63,34 @@ public class Information {
                 + gameSettings.getUserWinRounds() + ") - Computer(" + gameSettings.getComputerWinRounds() + ")");
     }
 
+
+    private String switchCaseChoices (int play){
+
+        String choiceName="???";
+
+        switch (play) {
+            case 1:
+                choiceName = "stone";
+                break;
+            case 2:
+                choiceName = "paper";
+                break;
+            case 3:
+                choiceName = "scissors";
+                break;
+        }
+
+        return choiceName;
+    }
+
     public void showChoices(Play play) {
 
-        String userChoiceName = "???";
         int userPlay = play.getUserPlay();
-
-        switch (userPlay) {
-            case 1:
-                userChoiceName = "stone";
-                break;
-            case 2:
-                userChoiceName = "paper";
-                break;
-            case 3:
-                userChoiceName = "scissors";
-                break;
-        }
+        String userChoiceName = switchCaseChoices(userPlay);
         System.out.println("You chose " + userChoiceName);
 
-        String computerChoiceName = "???";
         int computerPlay = play.getComputerPlay();
-
-        switch (computerPlay) {
-            case 1:
-                computerChoiceName = "stone";
-                break;
-            case 2:
-                computerChoiceName = "paper";
-                break;
-            case 3:
-                computerChoiceName = "scissors";
-                break;
-        }
-
+        String computerChoiceName = switchCaseChoices(computerPlay);
         System.out.println("Computer chose " + computerChoiceName);
     }
 }
