@@ -55,6 +55,5 @@ public class InvoiceDaoTestSuite {
         itemDao.save(item4);
 
 
-
     }
 }
