@@ -42,17 +42,17 @@ public class InvoiceDaoTestSuite {
 
 
         //When
-
+/*
         productDao.save(product1);
         productDao.save(product2);
         productDao.save(product3);
-
+*/
         invoiceDao.save(invoice);
-
+/*
         itemDao.save(item1);
         itemDao.save(item2);
         itemDao.save(item3);
-        itemDao.save(item4);
+        itemDao.save(item4);*/
 
 
     }
