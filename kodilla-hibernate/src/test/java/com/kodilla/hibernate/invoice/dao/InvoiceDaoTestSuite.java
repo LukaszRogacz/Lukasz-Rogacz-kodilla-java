@@ -3,6 +3,7 @@ package com.kodilla.hibernate.invoice.dao;
 import com.kodilla.hibernate.invoice.Invoice;
 import com.kodilla.hibernate.invoice.Item;
 import com.kodilla.hibernate.invoice.Product;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,20 +41,33 @@ public class InvoiceDaoTestSuite {
         invoice.getItems().add(item3);
         invoice.getItems().add(item4);
 
+        item1.setInvoice(invoice);
+        item2.setInvoice(invoice);
+        item3.setInvoice(invoice);
+        item4.setInvoice(invoice);
+
 
         //When
-/*
-        productDao.save(product1);
-        productDao.save(product2);
-        productDao.save(product3);
-*/
         invoiceDao.save(invoice);
-/*
-        itemDao.save(item1);
-        itemDao.save(item2);
-        itemDao.save(item3);
-        itemDao.save(item4);*/
+        int invoiceId=invoice.getId();
+        int product1Id=product1.getId();
+        int product2Id=product2.getId();
+        int product3Id=product3.getId();
 
+        //Then
+        Assert.assertNotEquals(0, invoiceId);
+        //CleanUp
+
+        try {
+            invoiceDao.deleteById(invoiceId);
+            productDao.deleteById(product1Id);
+            productDao.deleteById(product2Id);
+            productDao.deleteById(product3Id);
+        }
+        catch (Exception e)
+        {
+
+        }
 
     }
 }

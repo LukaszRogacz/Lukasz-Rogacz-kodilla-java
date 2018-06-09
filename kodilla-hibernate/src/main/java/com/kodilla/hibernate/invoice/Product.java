@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 public class Product {
     private int id;
     private String name;
-   // private List<Item> items;
 
     public Product() {
     }

@@ -15,14 +15,14 @@ public class Item {
 
     private Invoice invoice;
 
-
+    @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="INVOICE_ID")
     public Invoice getInvoice() {
         return invoice;
     }
 
-    private void setInvoice(Invoice invoice) {
+    public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
     }
 
@@ -49,13 +49,14 @@ public class Item {
     }
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="PRODUCT_ID")
     public Product getProduct() {
         return product;
     }
 
-    private void setProduct(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
