@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class DataInput {
 
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = MyScanner.getInstance();
 
     private int selectInputMethod() {
 
@@ -62,7 +62,7 @@ public class DataInput {
 
         while (whatRow != 999 && methodOfWritingData == 2) {
             System.out.println("What row,column,value,row,column,value,... ?");
-            String whatRowsColumnsValues = scanner.next();
+            String whatRowsColumnsValues = scanner.nextLine();
 
             String[] arrayRowColumnValue = whatRowsColumnsValues.split(",");
 
@@ -78,7 +78,7 @@ public class DataInput {
                 }
 
 
-                if (check.isElementInputRightRange(whatColumn - 1, whatRow - 1, whatValue)
+                if (check.isElementInputRightRange(whatColumn, whatRow, whatValue)
                         && whatRow != 999
                         && check.isSudokuConsistent(sudokuGame.getSudokuBoard(), whatColumn - 1, whatRow - 1, whatValue)) {
                     sudokuGame.setSudokuBoardValue(whatColumn - 1, whatRow - 1, whatValue);

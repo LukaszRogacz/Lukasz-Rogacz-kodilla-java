@@ -55,7 +55,7 @@ public class Check {
 
             }
         }
-        if (result == false)
+        if (!result)
             System.out.println("This Sudoku has no solution");
         return result;
     }
@@ -95,7 +95,7 @@ public class Check {
 
     public boolean resolve() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = MyScanner.getInstance();
 
         while (true) {
 
