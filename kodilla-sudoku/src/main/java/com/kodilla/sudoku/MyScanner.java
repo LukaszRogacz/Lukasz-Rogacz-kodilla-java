@@ -6,6 +6,10 @@ public class MyScanner {
 
     private static Scanner scanner;
 
+    private MyScanner() {
+
+    }
+
     public static Scanner getInstance() {
         if (scanner == null) {
             synchronized (MyScanner.class) {

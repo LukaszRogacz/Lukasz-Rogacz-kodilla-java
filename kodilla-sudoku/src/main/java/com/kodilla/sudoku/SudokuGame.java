@@ -56,134 +56,128 @@ public class SudokuGame {
     }
 
     private void solveRow() {
-        for (int i = SudokuElement.VALUE_MIN - 1; i < SudokuElement.VALUE_MAX; i++) {
-
-            Set<Integer> rowValues = new HashSet<>();
-            rowValues.clear();
-
-            for (int j = SudokuElement.VALUE_MIN - 1; j < SudokuElement.VALUE_MAX; j++) {
-                int rowValue = getSudokuBoardValue(i, j);
-                if (rowValue != SudokuElement.EMPTY) {
-                    rowValues.add(rowValue);
-                }
-            }
-            for (int j = SudokuElement.VALUE_MIN - 1; j < SudokuElement.VALUE_MAX; j++) {
-                int rowValue = getSudokuBoardValue(i, j);
-                if (rowValue == SudokuElement.EMPTY) {
-                    int quantityPossibleValuesBefore = getSudokuBoardPossibleValues(i, j).size();
-                    getSudokuBoardPossibleValues(i, j).removeAll(rowValues);
-                    int quantityPossibleValuesAfter = getSudokuBoardPossibleValues(i, j).size();
-
-                    if (quantityPossibleValuesAfter != quantityPossibleValuesBefore) {
-                        anyChange = true;
-                    }
-
-                    if (getSudokuBoardPossibleValues(i, j).size() == 1) {
-                        int onlyPossibleValue = SudokuElement.EMPTY;
-                        for (int value : getSudokuBoardPossibleValues(i, j)) {
-                            onlyPossibleValue = value;
-                        }
-
-                        setSudokuBoardValue(i, j, onlyPossibleValue);
-
-                    }
-                }
-            }
-        }
-
+        solveCore(false);
     }
 
     private void solveColumn() {
+        solveCore(true);
+    }
+
+    private void solveCore(boolean shouldReverse) {
         for (int i = SudokuElement.VALUE_MIN - 1; i < SudokuElement.VALUE_MAX; i++) {
 
             Set<Integer> columnValues = new HashSet<>();
             columnValues.clear();
 
             for (int j = SudokuElement.VALUE_MIN - 1; j < SudokuElement.VALUE_MAX; j++) {
-                int columnValue = getSudokuBoardValue(j, i);
+                int columnValue;
+                if (shouldReverse) {
+                    columnValue = getSudokuBoardValue(j, i);
+                }else{
+                    columnValue = getSudokuBoardValue(i, j);
+                }
                 if (columnValue != SudokuElement.EMPTY) {
                     columnValues.add(columnValue);
                 }
             }
             for (int j = SudokuElement.VALUE_MIN - 1; j < SudokuElement.VALUE_MAX; j++) {
-                int columnValue = getSudokuBoardValue(j, i);
+                int columnValue;
+                if (shouldReverse) {
+                    columnValue = getSudokuBoardValue(j, i);
+                }else{
+                    columnValue = getSudokuBoardValue(i, j);
+                }
+                if (columnValue != SudokuElement.EMPTY) {
+                    columnValues.add(columnValue);
+                }
                 if (columnValue == SudokuElement.EMPTY) {
 
-                    int quantityPossibleValuesBefore = getSudokuBoardPossibleValues(j, i).size();
-                    getSudokuBoardPossibleValues(j, i).removeAll(columnValues);
-                    int quantityPossibleValuesAfter = getSudokuBoardPossibleValues(j, i).size();
+                    int quantityPossibleValuesBefore;
+                    int quantityPossibleValuesAfter;
+
+                    if(shouldReverse) {
+                        quantityPossibleValuesBefore = getSudokuBoardPossibleValues(j, i).size();
+                        getSudokuBoardPossibleValues(j, i).removeAll(columnValues);
+                        quantityPossibleValuesAfter = getSudokuBoardPossibleValues(j, i).size();
+                    }else{
+                        quantityPossibleValuesBefore = getSudokuBoardPossibleValues(i, j).size();
+                        getSudokuBoardPossibleValues(i, j).removeAll(columnValues);
+                        quantityPossibleValuesAfter = getSudokuBoardPossibleValues(i, j).size();
+                    }
 
                     if (quantityPossibleValuesAfter != quantityPossibleValuesBefore) {
                         anyChange = true;
                     }
-                    if (getSudokuBoardPossibleValues(j, i).size() == 1) {
-                        int onlyPossibleValue = SudokuElement.EMPTY;
-                        for (int value : getSudokuBoardPossibleValues(j, i)) {
-                            onlyPossibleValue = value;
+                    if(shouldReverse) {
+                        if (getSudokuBoardPossibleValues(j, i).size() == 1) {
+                            int onlyPossibleValue = SudokuElement.EMPTY;
+                            for (int value : getSudokuBoardPossibleValues(j, i)) {
+                                onlyPossibleValue = value;
+                            }
+
+                            setSudokuBoardValue(j, i, onlyPossibleValue);
+
                         }
+                    }else{
+                        if (getSudokuBoardPossibleValues(i, j).size() == 1) {
+                            int onlyPossibleValue = SudokuElement.EMPTY;
+                            for (int value : getSudokuBoardPossibleValues(i, j)) {
+                                onlyPossibleValue = value;
+                            }
 
-                        setSudokuBoardValue(j, i, onlyPossibleValue);
+                            setSudokuBoardValue(i, j, onlyPossibleValue);
 
+                        }
                     }
                 }
             }
         }
 
-
     }
 
     private void solveRow2() {
+        solveCore2(false);
+    }
+
+    private void solveColumn2() {
+        solveCore2(true);
+    }
+
+    private void solveCore2(boolean shouldReverse) {
         for (int j = SudokuElement.VALUE_MIN - 1; j < SudokuElement.VALUE_MAX; j++) {
 
             int[] howManyNumbersinOneDimension = new int[SudokuElement.VALUE_MAX];
             int[] howManyNumbersinOneDimension2 = howManyNumbersinOneDimension.clone();
 
             for (int k = SudokuElement.VALUE_MIN - 1; k < SudokuElement.VALUE_MAX; k++) {
-                for (int ii = SudokuElement.VALUE_MIN - 1; ii < SudokuElement.VALUE_MAX; ii++) {
-                    if (getSudokuBoardPossibleValues(ii, j).contains(k + 1)) {
-                        howManyNumbersinOneDimension2[k]++;
+                for (int i = SudokuElement.VALUE_MIN - 1; i < SudokuElement.VALUE_MAX; i++) {
+                    if(shouldReverse) {
+                        if (getSudokuBoardPossibleValues(j, i).contains(k + 1)) {
+                            howManyNumbersinOneDimension2[k]++;
+                        }
+                    }else {
+                        if (getSudokuBoardPossibleValues(i, j).contains(k + 1)) {
+                            howManyNumbersinOneDimension2[k]++;
+                        }
                     }
                 }
             }
             for (int k = SudokuElement.VALUE_MIN - 1; k < SudokuElement.VALUE_MAX; k++) {
                 for (int i = SudokuElement.VALUE_MIN - 1; i < SudokuElement.VALUE_MAX; i++) {
-
-                    if ((howManyNumbersinOneDimension2[k] == 1) && getSudokuBoardPossibleValues(i, j).contains(k + 1)) {
-                        setSudokuBoardValue(i, j, k + 1);
+                    if(shouldReverse) {
+                        if ((howManyNumbersinOneDimension2[k] == 1) && getSudokuBoardPossibleValues(j, i).contains(k + 1)) {
+                            setSudokuBoardValue(j, i, k + 1);
+                        }
+                    }else{
+                        if ((howManyNumbersinOneDimension2[k] == 1) && getSudokuBoardPossibleValues(i, j).contains(k + 1)) {
+                            setSudokuBoardValue(i, j, k + 1);
+                        }
                     }
                 }
             }
         }
-
-
     }
 
-
-    private void solveColumn2() {
-        for (int i = SudokuElement.VALUE_MIN - 1; i < SudokuElement.VALUE_MAX; i++) {
-
-            int[] howManyNumbersinOneDimension = new int[SudokuElement.VALUE_MAX];
-            int[] howManyNumbersinOneDimension2 = howManyNumbersinOneDimension.clone();
-
-            for (int k = SudokuElement.VALUE_MIN - 1; k < SudokuElement.VALUE_MAX; k++) {
-                for (int jj = SudokuElement.VALUE_MIN - 1; jj < SudokuElement.VALUE_MAX; jj++) {
-                    if (getSudokuBoardPossibleValues(i, jj).contains(k + 1)) {
-                        howManyNumbersinOneDimension2[k]++;
-                    }
-                }
-            }
-            for (int k = SudokuElement.VALUE_MIN - 1; k < SudokuElement.VALUE_MAX; k++) {
-                for (int j = SudokuElement.VALUE_MIN - 1; j < SudokuElement.VALUE_MAX; j++) {
-
-                    if ((howManyNumbersinOneDimension2[k] == 1) && getSudokuBoardPossibleValues(i, j).contains(k + 1)) {
-                        setSudokuBoardValue(i, j, k + 1);
-                    }
-                }
-            }
-        }
-
-
-    }
 
 
     private SudokuElement getSudokuElement(int i, int j) {
