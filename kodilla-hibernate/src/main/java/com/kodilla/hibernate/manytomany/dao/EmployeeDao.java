@@ -14,4 +14,6 @@ import java.util.List;
 public interface EmployeeDao extends CrudRepository<Employee,Integer> {
     @Query
     List<Employee> findEmployeeByName(@Param("FIRSTNAME") String firstname);
+    @Query
+    List<Employee> retrieveEmployeeLastNameWith(@Param("ARG") String arg);
 }
