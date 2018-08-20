@@ -20,6 +20,7 @@ public class CompanyEmployeeFacadeTestSuite {
     CompanyDao companyDao;
     @Autowired
     EmployeeDao employeeDao;
+
     @Autowired
     CompanyEmployeeFacade companyEmployeeFacade;
 
@@ -38,7 +39,7 @@ public class CompanyEmployeeFacadeTestSuite {
         companyDao.save(greyMatter);
         int greyMatterId = greyMatter.getId();
 
-        int companyWith=companyEmployeeFacade.findCompanyNameWith(companyDao,"%Ma%").size();
+        int companyWith=companyEmployeeFacade.findCompanyNameWith("Ma").size();
 
         //Then
         Assert.assertEquals(3, companyWith);
@@ -68,7 +69,7 @@ public class CompanyEmployeeFacadeTestSuite {
         employeeDao.save(walterwhite);
         int walterwhiteId = walterwhite.getId();
 
-        int employeeWith=companyEmployeeFacade.findEmployeeNameWith(employeeDao,"%it%").size();
+        int employeeWith=companyEmployeeFacade.findEmployeeNameWith("it").size();
 
         //Then
         Assert.assertEquals(2, employeeWith);
